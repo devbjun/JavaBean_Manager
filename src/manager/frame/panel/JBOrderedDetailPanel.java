@@ -45,6 +45,7 @@ public class JBOrderedDetailPanel extends JPanel {
 		
 		// 텍스트 필드 설정
 		JTextField tfOrderNumber = new JTextField("승인 번호 입력");
+		tfOrderNumber.setCaretPosition(tfOrderNumber.getText().length());
 		tfOrderNumber.setPreferredSize(new Dimension(BasicFrame.width / 4 * 3 - 15, 0));
 		
 		// 텍스트 필드 디자인 설정
@@ -52,7 +53,7 @@ public class JBOrderedDetailPanel extends JPanel {
 		tfOrderNumber.setBackground(Color.DARK_GRAY);
 		tfOrderNumber.setForeground(Color.WHITE);
 		tfOrderNumber.setCaretColor(Color.WHITE);
-		tfOrderNumber.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
+		tfOrderNumber.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
 		
 		
 		// 조회버튼 정의 및 리스너 익명 클래스 등록

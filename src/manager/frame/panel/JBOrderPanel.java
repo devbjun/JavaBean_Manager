@@ -26,9 +26,12 @@ import jdbc.oracle.manager.Managers;
 @SuppressWarnings("serial")
 public class JBOrderPanel extends JPanel implements ActionListener {
 	
-	private static DefaultListSelectionModel dlsm;
+	private static DefaultListSelectionModel[] dlsm = new DefaultListSelectionModel[2];
 	private static JBMutableTable tOrder, tDetail, tSelection;
+	
 	private static String nCustomer;
+	private String[] nItem = new String[1];
+	private String[] nDetail = new String[1];
 	
 	private JScrollPane spDetail;
 	
@@ -38,6 +41,9 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 	private JButton bCancel;
 	private JButton bComplete;
 	
+	/**
+	 * 현재 접수된 주문 내역을 보여주는 패널
+	 */
 	public JBOrderPanel() {
 		
 		// 패널 레이아웃 설정
@@ -81,7 +87,24 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 	                    	
 	                    	// 5초마다 리스트 업데이트
 	                        Thread.sleep(5000);
-	                        tOrder.addRowsAtNew(Managers.getOrderNotReceivedAtToday());
+	                        
+	                        // 목록이 아에 없는 경우는 테이블을 새로 만든다.
+	                        if (tOrder.getContents()[0][0] == null) {
+	                        	
+	                        	// 테이블 등록
+	                        	tOrder = new JBMutableTable(Managers.getOrderNotReceivedAtToday());
+	                        	tOrder.addListSelectionListener(new JBListSelectionListener(tOrder));
+	                        	
+	                        	// 패널에 테이블 등록
+	                        	pWest.removeAll();
+	                        	pWest.add(tOrder.getScrollTable(), BorderLayout.CENTER);
+	                        	
+	                        	// 화면 갱신
+	                        	revalidate();
+	                        }
+	                        else {
+		                        tOrder.addRowsAtNew(Managers.getOrderNotReceivedAtToday());
+	                        }
 	                        
 	                    // 오류 처리
 	                    } catch (Exception e) {
@@ -281,17 +304,22 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 			// 튜플이 클릭되었을 시에만 동작하도록 처리
 			if(!e.getValueIsAdjusting()) {
 				
-				dlsm = (DefaultListSelectionModel) e.getSource();
+				// 선택된 테이블 등록
 				tSelection = _tSelection;
 				
 				// tOrder의 행이 클릭되었을 시
 				if (_tSelection.equals(tOrder)) {
 					
+					dlsm[0] = (DefaultListSelectionModel) e.getSource();
+					
 					// 오류 처리
 					try {
 						
 						// 가장 최근에 선택된 주문번호를 저장하도록 한다.
-						nCustomer = tOrder.getContents()[dlsm.getAnchorSelectionIndex()][0];
+						nCustomer = tOrder.getContents()[dlsm[0].getAnchorSelectionIndex()][0];
+						
+						// 주문 처리전 nCustomer가 null인 경우 처리를 중단한다.
+						if (nCustomer == null) { return; }
 						
 						// 선택된 주문에 따른 상세 주문 내역 테이블을 보이도록 한다.
 						((JBOrderPanel) Manager.getMenus().getComponent(0)).setOrderDetailTable(Managers.getOrderDetailNotReceivedAtNumber(nCustomer));
@@ -310,7 +338,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 				
 				// tDetail의 행이 클릭되었을 시
 				if (_tSelection.equals(tDetail)) {
-					dlsm = (DefaultListSelectionModel) e.getSource();
+					dlsm[1] = (DefaultListSelectionModel) e.getSource();
 				}
 			}
 		}
@@ -325,9 +353,10 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 		
 		// 오류 처리
 		try {
-			
+
 			// 아무것도 선택되지 않았을 때 처리
-			if (tSelection == null) {
+			if (tOrder.getContents()[dlsm[0].getAnchorSelectionIndex()][0] == null) {
+				
 				JOptionPane.showConfirmDialog(null, 
 						"주문 조회 테이블의 주문 번호를 선택한 후 다시 시도해주세요.", 
 						"JavaBean - 경고",
@@ -346,15 +375,22 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 					
 					// 선택 항목 및 세부 주문 사항에 대해 일괄 취소 처리
 					Managers.setOrderStatus(
-								tSelection.getContents()[dlsm.getAnchorSelectionIndex()][0], 
+							tOrder.getContents()[dlsm[0].getAnchorSelectionIndex()][0], 
 								(e.getSource().equals(bCancel)) ? "주문 취소" : "수령 완료");
 						
 					// 주문 목록 테이블 업데이트
 					setOrderTable(Managers.getOrderNotReceivedAtToday());
 					
-					
 					// 세부 주문 목록 테이블 업데이트
 					setOrderDetailTable(Managers.getOrderDetailNotReceivedAtNumber("-1"));
+					
+					// 처리 완료 메시지 출력
+					JOptionPane.showConfirmDialog(null, 
+						"정상적으로 처리 완료되었습니다.", 
+						"JavaBean - 처리 완료",
+						JOptionPane.DEFAULT_OPTION,
+						JOptionPane.INFORMATION_MESSAGE);
+
 				}
 			}
 			else {
@@ -365,34 +401,33 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 						(e.getSource().equals(bCancel)) ? "JavaBean - 주문 취소" : "JavaBean - 수령 완료",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					
-					String[] _nItem = {
-							tSelection.getContents()[dlsm.getAnchorSelectionIndex()][0]
-					};
-					
-					String[] _nDetail = {
-							tSelection.getContents()[dlsm.getAnchorSelectionIndex()][1]
-					};
+					nItem[0] = tDetail.getContents()[dlsm[1].getAnchorSelectionIndex()][0];
+					nDetail[0] = tDetail.getContents()[dlsm[1].getAnchorSelectionIndex()][1];
 					
 					// 선택한 세부 주문 사항 취소 처리
-					Managers.setOrderDetailStatus(nCustomer, _nItem, _nDetail, 
+					Managers.setOrderDetailStatus(nCustomer, nItem, nDetail, 
 							(e.getSource().equals(bCancel)) ? "주문 취소" : "수령 완료");
 					
 					// 테이블 내용에서 해당 열을 삭제처리한다.
-					tDetail.remove(dlsm.getAnchorSelectionIndex());
+					setOrderDetailTable(Managers.getOrderDetailNotReceivedAtNumber(nCustomer));
 					
 					// 만일 세부 주문 목록이 더이상 존재하지 않는 경우 주문 테이블을 새롭게 갱신한다.
 					if(tDetail.getRowCount() == 0)
 						setOrderTable(Managers.getOrderNotReceivedAtToday());
+					
+					// 화면 갱신
+					revalidate();
+					
+					// 처리 완료 메시지 출력
+					JOptionPane.showConfirmDialog(null, 
+						"정상적으로 처리 완료되었습니다.", 
+						"JavaBean - 처리 완료",
+						JOptionPane.DEFAULT_OPTION,
+						JOptionPane.INFORMATION_MESSAGE);
+
 	    		}
 			}
 			
-			// 오류 메시지 출력
-			JOptionPane.showConfirmDialog(null, 
-				"정상적으로 처리 완료되었습니다.", 
-				"JavaBean - 처리 완료",
-				JOptionPane.DEFAULT_OPTION,
-				JOptionPane.INFORMATION_MESSAGE);
-
 		// 에러 처리
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

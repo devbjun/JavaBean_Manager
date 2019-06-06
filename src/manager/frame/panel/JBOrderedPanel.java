@@ -189,15 +189,15 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 				Date _sDate = format.parse(lblDate[0].getText());
 				Date _eDate = format.parse(lblDate[1].getText());
 				
-				// 두 날짜가 동일한 경우 _eDate를 하루 증가시킨다.
-				if (_sDate.compareTo(_eDate) == 0) {
-					Calendar _cal = Calendar.getInstance();
+				
+				// DB조회를 위해 마지막 날짜를 하루 더 증가시켜준다.
+				Calendar _cal = Calendar.getInstance();
 					
-					_cal.setTime(_eDate);
-					_cal.add(Calendar.DATE, 1);
+				_cal.setTime(_eDate);
+				_cal.add(Calendar.DATE, 1);
 					
-					_eDate = _cal.getTime();
-				}
+				_eDate = _cal.getTime();
+				
 				
 				// 테이블 새로고침
 				Vector<JSONObject> _data = Managers.getOrderAtPeriod(

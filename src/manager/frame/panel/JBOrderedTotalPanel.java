@@ -134,7 +134,7 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 		try {
 			
 			String[] _date = getToday();
-			tOrderedList = new JBMutableTable(Managers.getStoreTotalPricePerDayAtPeriod(_date[0], _date[0]));
+			tOrderedList = new JBMutableTable(Managers.getStoreTotalPricePerDayAtPeriod(_date[0], _date[1]));
 			
 			pCenter.add(tOrderedList.getScrollTable(), BorderLayout.CENTER);
 			
@@ -151,6 +151,7 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 		// 디자인 설정
 		pCenter.setOpaque(true);
 		pCenter.setBackground(Color.DARK_GRAY);
+		pCenter.setBorder(BorderFactory.createEmptyBorder(3, 0, 0, 0));
 		pCenter.setPreferredSize(new Dimension(BasicFrame.width, BasicFrame.height / 16 * 12));
 		
 		// 패널 등록
@@ -240,16 +241,16 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 				
 				Date _sDate = format.parse(lblDate[0].getText());
 				Date _eDate = format.parse(lblDate[1].getText());
+
 				
-				// 두 날짜가 동일한 경우 _eDate를 하루 증가시킨다.
-				if (_sDate.compareTo(_eDate) == 0) {
-					Calendar _cal = Calendar.getInstance();
+				// DB조회를 위해 마지막 날짜를 하루 더 증가시켜준다.
+				Calendar _cal = Calendar.getInstance();
 					
-					_cal.setTime(_eDate);
-					_cal.add(Calendar.DATE, 1);
+				_cal.setTime(_eDate);
+				_cal.add(Calendar.DATE, 1);
 					
-					_eDate = _cal.getTime();
-				}
+				_eDate = _cal.getTime();
+				
 				
 				// 테이블 새로고침
 				Vector<JSONObject> _data = Managers.getStoreTotalPricePerDayAtPeriod(

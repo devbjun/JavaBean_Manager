@@ -79,6 +79,9 @@ public class JBMutableTable extends JTable {
 				
 		// 컬럼 선택 불가 설정
 		table.setColumnSelectionAllowed(false);
+		
+		// 열 선택 불가 설정
+		table.setRowSelectionAllowed((contents[0][0] != null));
 				
 		// 테이블 컬럼 디자인 설정
 		table.setOpaque(true);
@@ -189,7 +192,7 @@ public class JBMutableTable extends JTable {
 			}
 		}
 		
-		// 새로 받은 정보가 기존 정보보다 많은 경우 처리
+		// 새로 받은 정보가 기존 정보보다 많거나, 해당 주문이 첫번째 주문인 경우에 정보를 넣어준다.
 		if (_c.length > contents.length) {
 			
 			// 로우 값을 추가한다.
@@ -198,13 +201,9 @@ public class JBMutableTable extends JTable {
 			
 			// 기존의 내포 값을 새로운 내포 값으로 대체한다.
 			contents = _c;
+			
+			// 행 선택 설정
+			table.setRowSelectionAllowed(true);
 		}
-	}
-	
-	/**
-	 * 해당 번호에 해당하는 열을 지운다.
-	 */
-	public void remove(int _index) {
-		mTable.removeRow(_index);
 	}
 }

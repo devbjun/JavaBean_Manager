@@ -51,35 +51,36 @@ public class Manager extends BasicFrame {
 		// 프로그램 종료 전 메시지 띄우기
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-	      		if (JOptionPane.showConfirmDialog(null,
-    					"프로그램을 종료하시겠습니까?",
-    					"JavaBean - 프로그램 종료",
-    					JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
-	      			
-	      			// 프로그램 종료 방지
-	      			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        		}
-	      		else {
-	      			try {
-	      				
-	      				// 프로그램 종료시 JDBC 연결 해제
-	      				JDBCManager jdbc = JDBCManager.getJDBCManager();
+				if (JOptionPane.showConfirmDialog(null,
+				    	"프로그램을 종료하시겠습니까?",
+				    	"JavaBean - 프로그램 종료",
+				    	JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+							
+					try {
+			      				
+					    // 프로그램 종료시 JDBC 연결 해제
+					    JDBCManager jdbc = JDBCManager.getJDBCManager();
 						jdbc.setClose();
-						
+										
 						// 프로그램 종료
-		      			setDefaultCloseOperation(EXIT_ON_CLOSE);
-						
+						setDefaultCloseOperation(EXIT_ON_CLOSE);
+										
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-						
+										
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-	      		}
+					      	
+				}
+				else {			
+					// 프로그램 종료 방지
+				    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+				}
 			}
-	    });
+		});
 	}
 	
 	private void setTabbedPanel() {
@@ -149,6 +150,6 @@ public class Manager extends BasicFrame {
 		// 이곳은 프로그램 실행을 위한 메인함수만 작성하도록 합니다.
 		
 		// 매니저용 프로그램 시작
-		new Manager(" JavaBean 1.0.5v - 관리자 프로그램", 800, 500);
+		new Manager(" JavaBean 1.0.7v - 관리자 프로그램", 800, 500);
 	}
 }
