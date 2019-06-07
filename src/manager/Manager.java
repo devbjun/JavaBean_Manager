@@ -16,6 +16,7 @@ import javax.swing.JTabbedPane;
 
 import manager.frame.BasicFrame;
 import manager.frame.component.JBTabbedPaneUI;
+import manager.frame.panel.JBItemListPanel;
 import manager.frame.panel.JBOrderPanel;
 import manager.frame.panel.JBOrderedDetailPanel;
 import manager.frame.panel.JBOrderedItemPanel;
@@ -94,12 +95,13 @@ public class Manager extends BasicFrame {
 				new JBOrderedPanel(), 
 				new JBOrderedDetailPanel(), 
 				new JBOrderedItemPanel(),
-				new JBOrderedTotalPanel()
+				new JBOrderedTotalPanel(),
+				new JBItemListPanel()
 		};
 		
 		// 탭 목록 변수 선언
 		String[] nTabList = {
-				"주문 조회", "주문 내역", "주문 검색", "판매 내역", "매출 내역"
+				"주문 조회", "주문 내역", "주문 검색", "판매 내역", "매출 내역", "물품 목록"
 		};
 		
 		// 탭 목록 수만큼 탭 표기
