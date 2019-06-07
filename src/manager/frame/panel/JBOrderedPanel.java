@@ -128,7 +128,7 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 		try {
 			
 			String[] _date = getToday();
-			tOrderedList = new JBMutableTable(Managers.getOrderAtPeriod(_date[0], _date[0]));
+			tOrderedList = new JBMutableTable(Managers.getOrderAtPeriod(_date[0], _date[1]));
 			
 			pSouth.add(tOrderedList.getScrollTable(), BorderLayout.CENTER);
 			

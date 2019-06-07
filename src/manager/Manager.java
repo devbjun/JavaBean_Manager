@@ -73,7 +73,7 @@ public class Manager extends BasicFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					      	
+
 				}
 				else {			
 					// 프로그램 종료 방지
@@ -97,10 +97,12 @@ public class Manager extends BasicFrame {
 				new JBOrderedTotalPanel()
 		};
 		
+		// 탭 목록 변수 선언
 		String[] nTabList = {
 				"주문 조회", "주문 내역", "주문 검색", "판매 내역", "매출 내역"
 		};
 		
+		// 탭 목록 수만큼 탭 표기
 		for (int i = 0; i < pTabList.length; i++) {
 			
 			// 탭에 표기할 라벨 선언

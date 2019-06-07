@@ -77,15 +77,17 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 			tOrder = new JBMutableTable(Managers.getOrderNotReceivedAtToday());
 			tOrder.addListSelectionListener(new JBListSelectionListener(tOrder));
 			
+			// 테이블이 붙여진 JScrollPane을 가져와서 pWest에 등록한다.
 			pWest.add(tOrder.getScrollTable(), BorderLayout.CENTER);
 			
 			// 익명 쓰레드 실행
+			// 5초마다 반복하며 새로 주문된 내용을 업데이트
 			new Thread() {
 	            public void run() {
 	                while (true) {
 	                    try {
 	                    	
-	                    	// 5초마다 리스트 업데이트
+	                    	// 5초동안 쓰레드 휴지
 	                        Thread.sleep(5000);
 	                        
 	                        // 목록이 아에 없는 경우는 테이블을 새로 만든다.
@@ -101,8 +103,13 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 	                        	
 	                        	// 화면 갱신
 	                        	revalidate();
+	                     
 	                        }
 	                        else {
+	                        	
+	                        	// 새로운 내용과 기존 테이블 내용을 비교하여 다른 부분만 테이블에 추가한다.
+	                        	// 테이블을 새로 만들면 사용자가 선택했던 셀렉션이 사라지는 문제 발생
+	                        	// 따라서 기존 테이블과 다른 내용의 행들만을 추려서 테이블에 추가시킨다.
 		                        tOrder.addRowsAtNew(Managers.getOrderNotReceivedAtToday());
 	                        }
 	                        
@@ -355,7 +362,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 		try {
 
 			// 아무것도 선택되지 않았을 때 처리
-			if (tOrder.getContents()[dlsm[0].getAnchorSelectionIndex()][0] == null) {
+			if ((dlsm[0] == null) || (tOrder.getContents()[dlsm[0].getAnchorSelectionIndex()][0] == null)) {
 				
 				JOptionPane.showConfirmDialog(null, 
 						"주문 조회 테이블의 주문 번호를 선택한 후 다시 시도해주세요.", 

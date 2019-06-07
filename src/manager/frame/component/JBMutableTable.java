@@ -125,14 +125,26 @@ public class JBMutableTable extends JTable {
 		table.getSelectionModel().addListSelectionListener(_listSelectionListener);
 	}
 	
+	/**
+	 * 테이블이 붙여진 스크롤 테이블 반환
+	 * @return JScrollPane
+	 */
 	public JScrollPane getScrollTable() {
 		return spTable;
 	}
 	
+	/**
+	 * 테이블의 외연 반환
+	 * @return String[]
+	 */
 	public String[] getHeader() {
 		return header;
 	}
 	
+	/**
+	 * 테이블의 내포 반환
+	 * @return String[][]
+	 */
 	public String[][] getContents() {
 		return contents;
 	}

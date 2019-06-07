@@ -169,7 +169,7 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 			// 총 매출 금액 표시 라벨 정의
 			String[] _date = getToday();
 			lblTotal = new JLabel("총 매출:         " +
-					Managers.getStoreTotalPriceAtPeriod(_date[0], _date[0]) +
+					Managers.getStoreTotalPriceAtPeriod(_date[0], _date[1]) +
 					" 원  "
 			);
 					
