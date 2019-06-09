@@ -69,7 +69,7 @@ public class JBItemListPanel extends JPanel implements ActionListener, ListSelec
 	public void setSouthPanel() {
 		
 		JPanel pSouth = new JPanel(new GridLayout(1, 3));
-		pSouth.setPreferredSize(new Dimension(BasicFrame.width, BasicFrame.height / 11 + 15));
+		pSouth.setPreferredSize(new Dimension(BasicFrame.width, BasicFrame.height / 11));
 		
 		// 상태 변경 버튼 관련 변수 초기화
 		String[] _nStatus = { "판매 가능", "일시 품절", "판매 중지" };
