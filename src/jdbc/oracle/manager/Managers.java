@@ -149,7 +149,7 @@ public class Managers {
 	 * @throws SQLException 
 	 * @throws Exception 
 	 */
-	public static int setOrderStatus(String _nCustomer, String _nStatus) throws ClassNotFoundException, SQLException, Exception {
+	public static int updateOrderStatus(String _nCustomer, String _nStatus) throws ClassNotFoundException, SQLException, Exception {
 		
 		int result;
 		String SQL;
@@ -234,7 +234,7 @@ public class Managers {
 	 * @throws SQLException 
 	 * @throws Exception 
 	 */
-	public static int setOrderDetailStatus(String _nCustomer, String[] _nItem, String[] _nDetail, String _nStatus) throws ClassNotFoundException, SQLException, Exception {
+	public static int updateOrderDetailStatus(String _nCustomer, String[] _nItem, String[] _nDetail, String _nStatus) throws ClassNotFoundException, SQLException, Exception {
 		
 		int result = 0;
 		String SQL;

@@ -381,7 +381,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					
 					// 선택 항목 및 세부 주문 사항에 대해 일괄 취소 처리
-					Managers.setOrderStatus(
+					Managers.updateOrderStatus(
 							tOrder.getContents()[dlsm[0].getAnchorSelectionIndex()][0], 
 								(e.getSource().equals(bCancel)) ? "주문 취소" : "수령 완료");
 						
@@ -412,7 +412,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 					nDetail[0] = tDetail.getContents()[dlsm[1].getAnchorSelectionIndex()][1];
 					
 					// 선택한 세부 주문 사항 취소 처리
-					Managers.setOrderDetailStatus(nCustomer, nItem, nDetail, 
+					Managers.updateOrderDetailStatus(nCustomer, nItem, nDetail, 
 							(e.getSource().equals(bCancel)) ? "주문 취소" : "수령 완료");
 					
 					// 테이블 내용에서 해당 열을 삭제처리한다.

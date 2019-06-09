@@ -154,6 +154,6 @@ public class Manager extends BasicFrame {
 		// 이곳은 프로그램 실행을 위한 메인함수만 작성하도록 합니다.
 		
 		// 매니저용 프로그램 시작
-		new Manager(" JavaBean 1.0.7v - 관리자 프로그램", 800, 500);
+		new Manager(" JavaBean 1.0.8v - 관리자 프로그램", 800, 500);
 	}
 }

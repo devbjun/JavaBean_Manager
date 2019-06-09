@@ -121,6 +121,11 @@ public class JBItemListPanel extends JPanel implements ActionListener, ListSelec
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			// 오류 발생시 확인창을 띄우고, 프로그램 종료
+			if (JOptionPane.showConfirmDialog(null, "예기치 않은 오류가 발생하여 프로그램을 종료합니다.\n(ErrorCode: -17)", "JavaBean - 오류 안내", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.OK_OPTION) {
+				System.exit(-17);
+			};
 		}
 	}
 
@@ -148,72 +153,33 @@ public class JBItemListPanel extends JPanel implements ActionListener, ListSelec
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
+		// 클릭된 버튼을 새로운 변수에 할당한다.
+		JButton btnEvent = ((e.getSource().equals(btnStatus[0])) ? btnStatus[0] :
+			((e.getSource().equals(btnStatus[1])) ? btnStatus[1] : btnStatus[2]));
+		
 		// 오류 처리
 		try {
-			// 판매 가능 버튼 클릭
-			if (e.getSource().equals(btnStatus[0])) {
-				if (JOptionPane.showConfirmDialog(null,
-						"해당 품목에 대한 상태를 '판매 가능'으로 변경하시겠습니까?",
-						"JavaBean - 물품 상태 변경",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					
-					// 선택 항목에 대한 상태 변경 함수 호출
-					/*Items.setItemStatus(btnStatus[2].getText());*/
-						
-					// 물품 목록 테이블 갱신
-					setRefresh();
-					
-					// 처리 완료 메시지 출력
-					JOptionPane.showConfirmDialog(null, 
-						"정상적으로 처리 완료되었습니다.", 
-						"JavaBean - 처리 완료",
-						JOptionPane.DEFAULT_OPTION,
-						JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
 			
-			// 일시 품절 버튼 클릭
-			if (e.getSource().equals(btnStatus[1])) {
-				if (JOptionPane.showConfirmDialog(null,
-						"해당 품목에 대한 상태를 '일시 품절'로 변경하시겠습니까?",
-						"JavaBean - 물품 상태 변경",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			// 상태 변경 안내 메시지를 띄운다
+			if (JOptionPane.showConfirmDialog(null,
+					"해당 품목에 대한 상태를 '" +
+					btnEvent.getText()	
+					+ "'(으)로 변경하시겠습니까?",
+					"JavaBean - 물품 상태 변경",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				
+				// 선택 항목에 대한 상태 변경 함수 호출
+				Items.updateItemStatus(tItem.getContents()[dlsm.getAnchorSelectionIndex()][1].toString(), btnEvent.getText());
 					
-					// 선택 항목에 대한 상태 변경 함수 호출
-					/*Items.setItemStatus(btnStatus[2].getText());*/
-						
-					// 물품 목록 테이블 갱신
-					setRefresh();
-					
-					// 처리 완료 메시지 출력
-					JOptionPane.showConfirmDialog(null, 
-						"정상적으로 처리 완료되었습니다.", 
-						"JavaBean - 처리 완료",
-						JOptionPane.DEFAULT_OPTION,
-						JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-			
-			// 판매 중지 버튼 클릭
-			if (e.getSource().equals(btnStatus[2])) {
-				if (JOptionPane.showConfirmDialog(null,
-						"해당 품목에 대한 상태를 '판매 중지'로 변경하시겠습니까?",
-						"JavaBean - 물품 상태 변경",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					
-					// 선택 항목에 대한 상태 변경 함수 호출
-					/*Items.setItemStatus(btnStatus[2].getText());*/
-						
-					// 물품 목록 테이블 갱신
-					setRefresh();
-					
-					// 처리 완료 메시지 출력
-					JOptionPane.showConfirmDialog(null, 
-						"정상적으로 처리 완료되었습니다.", 
-						"JavaBean - 처리 완료",
-						JOptionPane.DEFAULT_OPTION,
-						JOptionPane.INFORMATION_MESSAGE);
-				}
+				// 물품 목록 테이블 갱신
+				setRefresh();
+				
+				// 처리 완료 메시지 출력
+				JOptionPane.showConfirmDialog(null, 
+					"정상적으로 처리 완료되었습니다.", 
+					"JavaBean - 처리 완료",
+					JOptionPane.DEFAULT_OPTION,
+					JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 		// 에러 처리
@@ -221,6 +187,10 @@ public class JBItemListPanel extends JPanel implements ActionListener, ListSelec
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			
+			// 오류 발생시 확인창을 띄우고, 프로그램 종료
+			if (JOptionPane.showConfirmDialog(null, "예기치 않은 오류가 발생하여 프로그램을 종료합니다.\n(ErrorCode: -18)", "JavaBean - 오류 안내", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.OK_OPTION) {
+				System.exit(-18);
+			};
 		}
 	}
 }
