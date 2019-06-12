@@ -32,6 +32,7 @@ import jdbc.oracle.manager.Managers;
 @SuppressWarnings("serial")
 public class JBOrderedPanel extends JPanel implements ActionListener {
 	
+	// 달력 및 날짜 처리를 위한 변수
 	private SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
 	private GregorianCalendar today = new GregorianCalendar();
 	
@@ -60,7 +61,7 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 금일 미수령 주문 정보 테이블 패널 등록
+	 * 주문 내역을 보기 위한 시작 날짜 및 종료 날짜 선택 패널
 	 */
 	public void setNorthPanel() {
 		
@@ -119,19 +120,21 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 특정 기간 동안의 상세 주문 내역을 보여주는 패널 등록
+	 * 특정 기간 동안의 주문 내역을 보여주는 테이블 등록
 	 */
 	public void setSouthPanel() {
 		
 		pSouth = new JPanel(new BorderLayout());
 		
+		// 오류 처리
 		try {
 			
 			String[] _date = getToday();
 			tOrderedList = new JBMutableTable(Managers.getOrderAtPeriod(_date[0], _date[1]));
 			
 			pSouth.add(tOrderedList.getScrollTable(), BorderLayout.CENTER);
-			
+		
+		// 에러 처리
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,6 +154,10 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 		add(pSouth, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * 오늘 날짜 반환하는 함수
+	 * @return String[]
+	 */
 	private String[] getToday() {
 		SimpleDateFormat _format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar _cal = Calendar.getInstance();
@@ -165,6 +172,9 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 		return _day;
 	}
 
+	/**
+	 * 액션 리스너 이벤트 핸들러
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -179,7 +189,7 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 			fCalendar[1] = new JBOrderedCalendar("JavaBean - 종료 날짜 선택", MouseInfo.getPointerInfo().getLocation(), 400, 250, false);	
 		}
 		
-		// 조회 날짜 선택 버튼
+		// 조회 버튼
 		if (e.getSource().equals(btnShow)) {
 			SimpleDateFormat fDB = new SimpleDateFormat("yyyy-MM-dd");
 			

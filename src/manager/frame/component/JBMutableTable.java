@@ -179,12 +179,12 @@ public class JBMutableTable extends JTable {
 		// TODO Auto-generated method stub
 		
 		// 릴레이션 차수 불일치시 오류
-		if (_intension.get(0).keySet().size() - 1 != header.length) { throw new Exception("외연의 형식이 올바르지 않습니다."); }
+		if (_intension.get(0).keySet().size() - 1 != header.length) { throw new Exception("내포의 형식이 올바르지 않습니다."); }
 				
-		// 외연을 String[]로 변환
+		// 내포를 String[]로 변환
 		for (int i = 0; i < header.length; i++) {
 			if (!header[i].equals(((String[]) _intension.get(0).get("order"))[i]))
-				throw new Exception("외연이 일치하지 않습니다.");
+				throw new Exception("내포가 일치하지 않습니다.");
 		}
 		
 		// 내포를 String[][]로 변환

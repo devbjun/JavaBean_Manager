@@ -68,6 +68,9 @@ public class JBOrderedDetailPanel extends JPanel {
 						"JavaBean - 경고",
 						JOptionPane.DEFAULT_OPTION,
 						JOptionPane.WARNING_MESSAGE);
+
+				// 텍스트 필드 값 제거
+				tfOrderNumber.setText("");
 				return;
 			}
 			

@@ -50,7 +50,7 @@ public class Managers {
 				"FROM CUSTOMERS_TB CT, ORDERS_TB OT, ORDERS_STATUS_TB OST " + 
 				"WHERE CT.ORDER_SQ = OT.ORDER_SQ AND OT.ORDER_STATUS_SQ = OST.ORDER_STATUS_SQ AND OST.ORDER_STATUS_NM = '수령 대기' AND " +
 				"OT.ORDER_DT BETWEEN TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND TO_CHAR(SYSDATE + 1, 'YYYY-MM-DD') " +
-				"ORDER BY OT.ORDER_DT DESC";
+				"ORDER BY OT.ORDER_DT ASC";
 		
 		relation.setSQL(SQL);
 		Vector<JSONObject> intension = relation.getIntension();
@@ -64,7 +64,7 @@ public class Managers {
 					"FROM CUSTOMERS_TB CT, ORDERS_TB OT, ORDERS_STATUS_TB OST " + 
 					"WHERE CT.ORDER_SQ = OT.ORDER_SQ AND OT.ORDER_STATUS_SQ = OST.ORDER_STATUS_SQ AND OST.ORDER_STATUS_NM = '수령 대기' AND " +
 					"OT.ORDER_DT BETWEEN TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND TO_CHAR(SYSDATE + 1, 'YYYY-MM-DD') " +
-					"ORDER BY OT.ORDER_DT DESC";
+					"ORDER BY OT.ORDER_DT ASC";
 			
 			relation.setSQL(SQL);
 			return relation.getIntension();

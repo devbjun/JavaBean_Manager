@@ -196,7 +196,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 		bCancel = new JButton("주문 취소");
 		bCancel.addActionListener(this);
 		
-		bComplete = new JButton("주문 승인");
+		bComplete = new JButton("수령 완료");
 		bComplete.addActionListener(this);
 		
 		// 취소 버튼 색상 및 사이즈 조절

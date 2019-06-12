@@ -125,13 +125,15 @@ public class JBOrderedItemPanel extends JPanel implements ActionListener {
 		
 		pSouth = new JPanel(new BorderLayout());
 		
+		// 오류 처리
 		try {
 			
 			String[] _date = getToday();
 			tOrderedItemList = new JBMutableTable(Items.getOrderedQuantityListAtPeriod(_date[0], _date[1]));
 			
 			pSouth.add(tOrderedItemList.getScrollTable(), BorderLayout.CENTER);
-			
+		
+		// 에러 처리
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,6 +154,9 @@ public class JBOrderedItemPanel extends JPanel implements ActionListener {
 		add(pSouth, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * DB 처리를 위한 오늘 날짜를 반환하는 함수
+	 */
 	private String[] getToday() {
 		SimpleDateFormat _format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar _cal = Calendar.getInstance();

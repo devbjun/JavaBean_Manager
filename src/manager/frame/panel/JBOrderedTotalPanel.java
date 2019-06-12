@@ -125,7 +125,7 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 금일 미수령 주문 번호에 대한 상세 정보 테이블 및 일괄 취소 / 취소 / 수령 버튼 패널 등록
+	 * 설정한 기간동안의 요일별 판매 금액 내역 표기
 	 */
 	public void setCenterPanel() {
 		
@@ -158,6 +158,9 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 		add(pCenter, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * 지정한 기간 동안의 총 매출액 표기
+	 */
 	private void setSouthPanel() {
 		
 		// 레이아웃 설정
@@ -204,6 +207,9 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 		add(pSouth, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * DB 처리를 위한 금일 날짜를 반환하는 함수
+	 */
 	private String[] getToday() {
 		SimpleDateFormat _format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar _cal = Calendar.getInstance();
