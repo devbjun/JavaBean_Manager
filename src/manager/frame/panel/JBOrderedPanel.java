@@ -119,7 +119,7 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 금일 미수령 주문 번호에 대한 상세 정보 테이블 및 일괄 취소 / 취소 / 수령 버튼 패널 등록
+	 * 특정 기간 동안의 상세 주문 내역을 보여주는 패널 등록
 	 */
 	public void setSouthPanel() {
 		
