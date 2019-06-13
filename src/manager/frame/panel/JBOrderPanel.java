@@ -3,6 +3,7 @@ package manager.frame.panel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -203,6 +204,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 		bCancel.setOpaque(true);
 		bCancel.setFocusable(false);
 		bCancel.setBackground(Color.WHITE);
+		bCancel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		bCancel.setBorder(BorderFactory.createEmptyBorder());
 		bCancel.setPreferredSize(new Dimension(_width / 2 - 1, _height / 8));
 		
@@ -210,6 +212,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 		bComplete.setOpaque(true);
 		bComplete.setFocusable(false);
 		bComplete.setBackground(Color.WHITE);
+		bComplete.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		bComplete.setBorder(BorderFactory.createEmptyBorder());
 		bComplete.setPreferredSize(new Dimension(_width / 2 - 1, _height / 8));
 		

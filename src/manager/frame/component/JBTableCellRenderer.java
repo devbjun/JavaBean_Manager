@@ -40,6 +40,7 @@ public class JBTableCellRenderer extends DefaultTableCellRenderer {
         	
         	// 중앙 정렬 & 우측 정렬 설정
         	setHorizontalAlignment(cAlign);
+        	setFont(new Font("맑은 고딕", Font.PLAIN, 12));
         	
         	return this;
         }
@@ -56,7 +57,7 @@ public class JBTableCellRenderer extends DefaultTableCellRenderer {
      	component.setBackground(Color.WHITE);
      			
      	// 헤더 폰트 및 폰트 색상 설정
-     	component.setFont(new Font("", Font.BOLD, 12));
+     	component.setFont(new Font("맑은 고딕", Font.BOLD, 12));
      	component.setForeground(Color.DARK_GRAY);
      	
      	return component;

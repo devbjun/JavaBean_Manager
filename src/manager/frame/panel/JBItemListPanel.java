@@ -3,6 +3,7 @@ package manager.frame.panel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -88,6 +89,7 @@ public class JBItemListPanel extends JPanel implements ActionListener, ListSelec
 			btnStatus[i].setFocusable(false);
 			btnStatus[i].setBackground(Color.WHITE);
 			btnStatus[i].setForeground(Color.DARK_GRAY);
+			btnStatus[i].setFont(new Font("맑은 고딕", Font.BOLD, 12));
 			btnStatus[i].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
 			
 			pSouth.add(btnStatus[i]);

@@ -3,6 +3,7 @@ package manager.frame.panel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -53,6 +54,7 @@ public class JBOrderedDetailPanel extends JPanel {
 		tfOrderNumber.setBackground(Color.DARK_GRAY);
 		tfOrderNumber.setForeground(Color.WHITE);
 		tfOrderNumber.setCaretColor(Color.WHITE);
+		tfOrderNumber.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		tfOrderNumber.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
 		
 		
@@ -118,6 +120,7 @@ public class JBOrderedDetailPanel extends JPanel {
 		btnShow.setFocusable(false);
 		btnShow.setBackground(Color.WHITE);
 		btnShow.setForeground(Color.DARK_GRAY);
+		btnShow.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		btnShow.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 		
 		

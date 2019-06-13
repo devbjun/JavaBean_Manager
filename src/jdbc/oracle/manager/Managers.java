@@ -55,7 +55,7 @@ public class Managers {
 		relation.setSQL(SQL);
 		Vector<JSONObject> intension = relation.getIntension();
 		
-		// 내포가 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
+		// 외연이 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
 		if (intension.isEmpty()) {
 			
 			SQL = "SELECT " + 
@@ -111,7 +111,7 @@ public class Managers {
 		relation.setSQL(SQL);
 		Vector<JSONObject> intension = relation.getIntension();
 		
-		// 내포가 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
+		// 외연이 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
 		if (intension.isEmpty()) {
 			
 			SQL = "SELECT " + 
@@ -461,7 +461,7 @@ public class Managers {
 		relation.setSQL(SQL);
 		Vector<JSONObject> intension = relation.getIntension();
 			
-		// 내포가 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
+		// 외연이 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
 		if (intension.isEmpty()) {
 			
 			SQL = "SELECT " + 
@@ -516,7 +516,7 @@ public class Managers {
 		relation.setSQL(SQL);
 		Vector<JSONObject> intension = relation.getIntension();
 			
-		// 내포가 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
+		// 외연이 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
 		if (intension.isEmpty()) {
 			
 			SQL = "SELECT " + 
@@ -593,7 +593,7 @@ public class Managers {
 		relation.setSQL(SQL);
 		Vector<JSONObject> intension = relation.getIntension();
 		
-		// 내포가 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
+		// 외연이 NULL인 경우, NULL로 채워진 테이블을만들고 값을 반환한다.
 		if (intension.isEmpty()) { 
 			
 			SQL = "SELECT " + 

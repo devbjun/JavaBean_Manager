@@ -3,6 +3,7 @@ package manager.frame.panel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -79,6 +80,7 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 			lblDate[i].setOpaque(true);
 			lblDate[i].setBackground(Color.DARK_GRAY);
 			lblDate[i].setForeground(Color.WHITE);
+			lblDate[i].setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		}
 		
 		
@@ -92,6 +94,7 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 			btnDate[i].setFocusable(false);
 			btnDate[i].setBackground(Color.WHITE);
 			btnDate[i].setForeground(Color.DARK_GRAY);
+			btnDate[i].setFont(new Font("맑은 고딕", Font.BOLD, 12));
 			btnDate[i].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
 		}
 		
@@ -104,6 +107,7 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 		btnShow.setFocusable(false);
 		btnShow.setBackground(Color.DARK_GRAY);
 		btnShow.setForeground(Color.WHITE);
+		btnShow.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		btnShow.setBorder(BorderFactory.createEmptyBorder());
 		
 		
@@ -183,6 +187,7 @@ public class JBOrderedTotalPanel extends JPanel implements ActionListener {
 			lblTotal.setOpaque(true);
 			lblTotal.setBackground(Color.DARK_GRAY);
 			lblTotal.setForeground(Color.WHITE);
+			lblTotal.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 					
 		// 에러 처리
 		} catch (Exception e) {

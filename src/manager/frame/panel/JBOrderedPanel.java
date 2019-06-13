@@ -3,6 +3,7 @@ package manager.frame.panel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -77,6 +78,7 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 			lblDate[i].setOpaque(true);
 			lblDate[i].setBackground(Color.DARK_GRAY);
 			lblDate[i].setForeground(Color.WHITE);
+			lblDate[i].setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		}
 		
 		// 캘린더 열기 버튼 정의
@@ -89,6 +91,7 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 			btnDate[i].setFocusable(false);
 			btnDate[i].setBackground(Color.WHITE);
 			btnDate[i].setForeground(Color.DARK_GRAY);
+			btnDate[i].setFont(new Font("맑은 고딕", Font.BOLD, 12));
 			btnDate[i].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));
 		}
 		
@@ -100,6 +103,7 @@ public class JBOrderedPanel extends JPanel implements ActionListener {
 		btnShow.setFocusable(false);
 		btnShow.setBackground(Color.DARK_GRAY);
 		btnShow.setForeground(Color.WHITE);
+		btnShow.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		btnShow.setBorder(BorderFactory.createEmptyBorder());
 		
 		// 레이블 및 버튼 등록
