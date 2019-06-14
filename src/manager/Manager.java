@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.SocketException;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
@@ -40,6 +41,19 @@ public class Manager extends BasicFrame {
 	public Manager(String _title, int _width, int _height) {
 		super(_title, _width, _height);
 		// TODO Auto-generated constructor stub
+		
+		// 프로그램 중복 실행 방지 처리
+		try {
+			Monitor.monitoring();
+		} catch (SocketException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+			
+			// 오류 발생시 확인창을 띄우고, 프로그램 종료
+			if (JOptionPane.showConfirmDialog(null, "매니저 프로그램이 이미 실행 중입니다.", "JavaBean - 프로그램 종료", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.OK_OPTION) {
+				System.exit(9);
+			};
+		}
 		
 		// 아이콘 설정
 		setIconImage(Toolkit.getDefaultToolkit().getImage(pIcon));
@@ -158,6 +172,6 @@ public class Manager extends BasicFrame {
 		// 이곳은 프로그램 실행을 위한 메인함수만 작성하도록 합니다.
 		
 		// 매니저용 프로그램 시작
-		new Manager(" JavaBean 1.0.8v - 관리자 프로그램", 800, 500);
+		new Manager(" JavaBean 1.1.0v - 관리자 프로그램", 800, 500);
 	}
 }
