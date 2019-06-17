@@ -75,7 +75,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 		try {
 			
 			// 테이블 & 이벤트 처리기 등록
-			tOrder = new JBMutableTable(Managers.getOrderNotReceivedAtToday());
+			tOrder = new JBMutableTable(Managers.getOrderNotReceivedAtToday(false));
 			tOrder.addListSelectionListener(new JBListSelectionListener(tOrder));
 			
 			// 테이블이 붙여진 JScrollPane을 가져와서 pWest에 등록한다.
@@ -88,14 +88,14 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 	                while (true) {
 	                    try {
 	                    	
-	                    	// 5초동안 쓰레드 휴지
-	                        Thread.sleep(5000);
+	                    	// 1초동안 쓰레드 휴지
+	                        Thread.sleep(3000);
 	                        
 	                        // 목록이 아에 없는 경우는 테이블을 새로 만든다.
 	                        if (tOrder.getContents()[0][0] == null) {
 	                        	
 	                        	// 테이블 등록
-	                        	tOrder = new JBMutableTable(Managers.getOrderNotReceivedAtToday());
+	                        	tOrder = new JBMutableTable(Managers.getOrderNotReceivedAtToday(true));
 	                        	tOrder.addListSelectionListener(new JBListSelectionListener(tOrder));
 	                        	
 	                        	// 패널에 테이블 등록
@@ -111,24 +111,15 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 	                        	// 새로운 내용과 기존 테이블 내용을 비교하여 다른 부분만 테이블에 추가한다.
 	                        	// 테이블을 새로 만들면 사용자가 선택했던 셀렉션이 사라지는 문제 발생
 	                        	// 따라서 기존 테이블과 다른 내용의 행들만을 추려서 테이블에 추가시킨다.
-		                        tOrder.addRowsAtNew(Managers.getOrderNotReceivedAtToday());
+		                        tOrder.addRowsAtNew(Managers.getOrderNotReceivedAtToday(true));
 	                        }
 	                        
 	                    // 오류 처리
 	                    } catch (Exception e) {
 	                    	e.printStackTrace();
 	                    	
-	                    	// 쓰레드 및 일반 이벤트 처리에 의한 SQL Connection 문제가 해결되지 않음
-	                    	// Thread-Safe하게 처리하기 위해서는 다음의 방법을 사용해야함
-	                    	// 1. 쓰레드와 일반 메소드 처리용 JDBCManager를 분리하거나 Connection을 별도로 설정 해야함
-	                    	// -> 현실성 부족, 별도의 처리를 위해 모든 메소드 수정이 불가피
-	                    	// 2. 세마포어 방식
-	                    	// -> 구현 난이도가 있으며, 현재 설계된 프로그램의 방식에서는 사용하기가 난해함.
-	                    	// 3. 기타 방식 (별도 플래그 혹은 큐(Queue)를 통한 처리)
-	                    	// -> 플래그 방식은 도입이 어려우며, 큐(Queue) 방식은 처리 방법을 좀 더 고민해볼 필요가 있음
-	                    	
-	                    	// 상기 이유로 해당 오류 발생시 프로그램을 종료하지 않도록 한다.
-	                    	// 단순히 갱신만 안 될뿐, 특별한 이상은 없기 때문이다.
+	                    	// 쓰레드에 의한 갱신보다, 타 작업의 우선도가 더 높으므로
+	                    	// 해당 오류 발생 시 별도의 조치를 취할 필요가 없다.
 	                    }
 	                }
 	            }
@@ -389,7 +380,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 								(e.getSource().equals(bCancel)) ? "주문 취소" : "수령 완료");
 						
 					// 주문 목록 테이블 업데이트
-					setOrderTable(Managers.getOrderNotReceivedAtToday());
+					setOrderTable(Managers.getOrderNotReceivedAtToday(false));
 					
 					// 세부 주문 목록 테이블 업데이트
 					setOrderDetailTable(Managers.getOrderDetailNotReceivedAtNumber("-1"));
@@ -423,7 +414,7 @@ public class JBOrderPanel extends JPanel implements ActionListener {
 					
 					// 만일 세부 주문 목록이 더이상 존재하지 않는 경우 주문 테이블을 새롭게 갱신한다.
 					if(tDetail.getRowCount() == 0)
-						setOrderTable(Managers.getOrderNotReceivedAtToday());
+						setOrderTable(Managers.getOrderNotReceivedAtToday(false));
 					
 					// 화면 갱신
 					revalidate();
